@@ -57,11 +57,12 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
 
         a1_name <- lookup[lookup$clean_name == "NAME_1", "final_name"]
 
-        if (grepl('index', variable()) {
-          variable_name <- index_lookup[variable()]
+        if (grepl('index', variable)) {
+          variable_name <- index_lookup[[variable]]
         } else {
-          variable_name <- lookup[lookup$clean_name == variable(), "final_name"]
+          variable_name <- lookup[lookup$clean_name == variable, "final_name"]
         }
+
         if(variable == "ac_index") {
           variable_text <- ''
         } else {
@@ -73,7 +74,7 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
           paste0("<br/>", a1_name, ": "),
           map_data$NAME_1,
           "<br/>Total Adaptive Capacity: ", round(map_data$ac_index, 3),
-          variable_text,
+          variable_text
         )
 
         leaflet() |>
