@@ -1,0 +1,14 @@
+q_id,w_id,capital,question,value
+Q1,W1,economic,To what extend do your proposed activities/investments require householdes to make upfront financial investments?,3
+Q2,W2,economic,To what extend do your proposed activities/investments focussed on agricultural production?,3
+Q3,W3,human,To what extend do your proposed activities/investments require households to change their current practices or make use of new information sources?,3
+Q4,W4,human,"To what extend do your proposed activities/investments require a healthy workforce? ",3
+Q5,W5,social,To what extend do your proposed activities/investments require households to make use of alternative agricutural inputs?,3
+Q6,W6,social,To what extend do your proposed activities/investments require well functioning agricultural markets?,3
+Q7,W7,social,To what extend do your proposed activities/investments require households to change their current practices or make use of new information sources?,3
+Q8,W8,social,To what extend do your proposed activities/investments require well functioning agricultural markets?,3
+Q9,W8,social,To what extend do your proposed activities/investments require households to change their current practices or make use of new information sources?,3
+Q10,W9,physical,To what extend do your proposed activities/investments require householdes to make use of storage and processing facilities?,3
+Q11,W10,physical,To what extend do your proposed activities/investments require householdes to make upfront financial investments?,3
+Q12,W11,physical,To what extend do your proposed activities/investments require well functioning agricultural markets?,3
+Q13,W12,physical,To what extend do your proposed activities/investments require households to have access to irrigation services?,3

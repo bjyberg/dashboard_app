@@ -1,0 +1,54 @@
+iso3,clean_name,standardized_name,final_name,group
+BGD,NAME_1,division,Division,NA
+BGD,NAME_2,district,District,NA
+BGD,pov_rate_pct,poverty_rate,Poverty Rate*,Economic
+BGD,HH_agri_pct,agricultural_population,Agricultural Population*,Economic
+BGD,HH_loans_pct,access_to_financial_support,Access To Financial Support,Economic
+BGD,lit_rate_pct,literacy_rate,Literacy Rate,Human
+BGD,enrollment_rate_pct,enrolment_rate,Enrolment Rate,Human
+BGD,sub5_malnutrition,malnutrition_rate,Malnutrition Rate*,Human
+BGD,clinics_capita,healthcare_facilities,Healthcare Facilities*,Human
+BGD,farmer_bazar_pct,farmers_selling_via_hat_bazar,Farmers Selling Via Hat-bazar,Social
+BGD,HH_conventional_farm_pct,hhs_apply_conventional_farming_practices,HHs Apply Conventional Farming Practices,Social
+BGD,irrigation_rate_pct,irrigation_rate,Irrigation Rate,Physical
+BGD,land_ownership_ha_capita,land_ownership,Land Ownership,Physical
+BGD,internet_access_pct,access_to_internet,Access to Internet,Physical
+BGD,HH_2km_market_pct,distance_to_market,Distance to Market,Physical
+BGD,dist_city_km,distance_to_capital_city,Distance to Capital City*,Physical
+BGD,rd_density_km2,road_density,Road Density,Physical
+BGD,HH_clean_water_pct,access_to_drinking_water,Access To Drinking Water,Physical
+VNM,NAME_1,province,Province,NA
+VNM,NAME_2,district,District,NA
+VNM,pov_rate_pct,poverty_rate,Poverty Rate*,Economic
+VNM,HH_agri_pct,agricultural_population,Agricultural Population*,Economic
+VNM,HH_loans_pct,access_to_financial_support,Access To Financial Support,Economic
+VNM,lit_rate_pct,literacy_rate,Literacy Rate,Human
+VNM,enrollment_rate_pct,enrolment_rate,Enrolment Rate,Human
+VNM,sub5_malnutrition,malnutrition_rate,Malnutrition Rate*,Human
+VNM,hosptial_capita,healthcare_facilities,Healthcare Facilities,Human
+VNM,commune_insupply_pct,presence_of_input_suppliers,Presence Of Input Suppliers,Social
+VNM,commune_mkt_pct,presence_of_distributors,Presence Of Distributors,Social
+VNM,commune_extension_pct,presence_of_agricultural_extension_officers,Presence Of Agricultural Extension Officers,Social
+VNM,commune_OCOP_pct,presence_of_certification,Presence Of Certification,Social
+VNM,commune_process_pct,presence_of_processing_facilities,Presence Of Processing Facilities,Physical
+VNM,commune_collect_pct,presence_of_consolidators,Presence Of Consolidators,Physical
+VNM,farm_size_ha,average_farm_size,Average Farm Size,Physical
+VNM,dist_city_km,distance_to_nearest_city,Distance to Nearest  City*,Physical
+VNM,rd_density_km2,road_density,Road Density,Physical
+KHM,NAME_1,province,Province,NA
+KHM,NAME_2,district,District,NA
+KHM,pov_incidence,poverty_rate,Poverty Rate*,Economic
+KHM,HH_pct_assets,household_assets,Household Assets,Economic
+KHM,agri_dependent_pct,agricultural_population,Agricultural Population*,Economic
+KHM,bank_loan_capita,access_to_banking,Access To Banking,Economic
+KHM,lit_rate_pct,literacy_rate,Literacy Rate,Human
+KHM,lit_rate_gender_ratio,literacy_rate_by_gender,Literacy Rate By Gender,Human
+KHM,hosptial_capita,healthcare_facilities,Healthcare Facilities,Human
+KHM,irrigation_rate_pct,irrigation_rate,Irrigation Rate,Physical
+KHM,support_fac_num,presence_of_processing_plants,Presence Of Processing Plants,Physical
+KHM,internet_pct,access_to_internet,Access To Internet,Physical
+KHM,dist_city_km,distance_to_capital_city,Distance To Capital City*,Physical
+KHM,HH_clean_water_pct,access_to_drinking_water,Access To Drinking Water,Physical
+KHM,in_supply_capita,presence_of_input_suppliers,Presence Of Input Suppliers,Social
+KHM,farm_groups_capita,presence_of_farmer_groups,Presence Of Farmer Groups,Social
+KHM,extension_cap,extension_officers_per_farmer,Extension Officers Per Farmer,Social
