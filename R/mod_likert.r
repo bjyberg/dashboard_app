@@ -26,8 +26,7 @@ likertUI <- function(id) {
     class = "input-group",
     tags$span(
       style = "vertical-align: bottom;",
-      actionButton(ns("weight_qs"), "Weight Data",
-        icon = icon("circle-question", "lg")
+      actionButton(ns("weight_qs"), "Custom Weights"
       )
     ),
     conditionalPanel(
