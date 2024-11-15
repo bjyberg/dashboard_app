@@ -11,8 +11,7 @@ downloadUI <- function(id) {
       virtualSelectInput(ns("downloadType"), "Download Type",
         choices = c(
           "CSV" = ".csv",
-          "Geopackage" = ".gpkg",
-          "FlatGeobuf" = ".fgb"
+          "Geopackage" = ".gpkg"
         ),
         multiple = FALSE
       ),
@@ -36,7 +35,7 @@ downloadServer <- function(id, iso3, country_bounds, weighted_data, admin_sel) {
           weighted_data <- subset(weighted_data(), GID_2 %in% admin_sel())
           if (input$downloadType == ".csv") {
               write.csv(weighted_data, file)
-          } else if (input$downloadType %in% c('.gpkg', '.fgb')) {
+          } else if (input$downloadType %in% c('.gpkg')) {
             mergeCols <- c("admin1_name", "admin2_name", "GID_2", "NAME_2",
              "NAME_1", "HASC_2")
             country_bounds()[country_bounds()$GID_2 %in% admin_sel(), ] |>
