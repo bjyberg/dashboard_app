@@ -41,13 +41,11 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   alertServer("more_info")
   weights <- likertServer("likert_weights")
-  # observe(print(weights()))
   country_data <- countryServer('country-sel')
   admin_sel <- adminServer('admin-sel', reactive(country_data()$bound))
   var_sel <- variableServer('variable-selection', reactive(country_data()$lookup))
   plotweightServer('capital_weightPlot', reactive(weights()$capital))
 
-  # observe(print(var_sel()))
 # Weighting Values
   weighted_index_df <- reactive({
     req(weights())

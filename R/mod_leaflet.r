@@ -118,9 +118,7 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
         a1_name <- subset(lookup, clean_name == "NAME_1", "final_name")[[1]]
         a2_name <- subset(lookup, clean_name == "NAME_2", "final_name")[[1]]
         df <- as.data.frame(dt_table())[c("NAME_1", "NAME_2", names(index_lookup))]
-        print(names(df))
         names(df) <- c(a1_name, a2_name, unlist(index_lookup))
-        print(names(df))
         formatted_dt <- formattable(
           df,
           list(
@@ -135,7 +133,7 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
             selection = "single",
             options = list(scrollX = TRUE, stateSave = TRUE,
               paging = TRUE, pageLength = 5,
-              columnDefs = list(list(targets = c(2, 3, 4, 5, 6), orderable = FALSE))),
+              columnDefs = list(list(targets = c(3, 4, 5, 6), orderable = FALSE))),
             rownames = FALSE)
         
         return(formatted_dt)

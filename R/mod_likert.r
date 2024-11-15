@@ -87,12 +87,14 @@ likertServer <- function(id) {
         list(capital = capitals, variable = variables)
       })
 
+      weights_debounced <- debounce(weights, 1000)
+
       output$initial_weights <- reactive({
         return(all(lik_sels$data$value == 3))
       })
       outputOptions(output, "initial_weights", suspendWhenHidden = FALSE)
       
-      return(weights)
+      return(weights_debounced)
     }
   )
 }
