@@ -7,7 +7,7 @@ library(formattable)
 leafletUI <- function(id) {
   ns <- NS(id)
   tagList(
-    leafletOutput(ns("map")),
+    leafletOutput(ns("map"), height = 650),
     hr(),
     DTOutput(ns("varTable"))
   )
@@ -23,16 +23,25 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
         social_index = "Social Index", physical_index = "Physical Index",
         economic_index = "Economic Index")
 
-      output$map <- renderLeaflet({
+      output$map <- debounce(
+        renderLeaflet({
         req(admin_sel)
-        if (is.null(admin_sel())) {
+        req(data()$bound)
+        req(weighted_data())
+        req(variable_sel())
+        bounds <- data()$bound
+
+
+        if (is.null(admin_sel()) || is.null(variable_sel())) {
           return(leaflet() |> addTiles())
+        } else {
+          admins <- admin_sel()
+          print(admins)
+          bounds <- bounds[bounds$GID_2 %in% admins]
         }
 
-        bounds <- data()$bound
-        if (!is.null(admin_sel())) {
-          admins <- admin_sel()
-          bounds <- bounds[bounds$GID_2 %in% admins]
+        if (nrow(bounds) == 0) {
+          return(leaflet() |> addTiles())
         }
 
         map_data <- terra::merge(
@@ -40,7 +49,13 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
           weighted_data(),
           by = 'GID_2'
         )
-        variable <- grep(variable_sel()$variable, names(map_data), value = T)
+        
+        if (variable_sel()$type == "capital") {
+          variable <- paste0(tolower(variable_sel()$variable), "_index")
+        } else {
+          variable <- variable_sel()$variable
+        }
+        # variable <- grep(variable_sel()$variable, names(map_data), value = T) #rembember, if there is an error - blame regex
 
         lookup <- data()$lookup
           if(variable_sel()$type == "capital") {
@@ -50,7 +65,8 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
             colors <- "YlOrRd"
             variable_name <- lookup[lookup$clean_name == variable, "final_name"]
           }
-        leaf_pal <- colorNumeric(colors, map_data[[variable]], na.color = "transparent")
+        # leaf_pal <- colorNumeric(colors, map_data[[variable]], na.color = "transparent")
+        leaf_pal <- colorNumeric(colors, c(0,1), na.color = "transparent")
         map_data$selected_var <- map_data[[variable]]
 
         a1_name <- lookup[lookup$clean_name == "NAME_1", "final_name"]
@@ -81,18 +97,21 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
             data = map_data,
             layerId = map_data$GID_2,
             fillColor = ~ leaf_pal(selected_var),
-            fillOpacity = 0.7,
+            fillOpacity = 0.8,
             color = "white",
             weight = 1,
             popup = pop_content
           ) |>
           addLegend(
             pal = leaf_pal,
-            values = map_data$selected_var,
-            opacity = 0.7,
+            # values = map_data$selected_var,
+            values = c(0,1),
+            opacity = 0.8,
             title = variable_name
             )
-      })
+      }),
+      200)
+
 
       dt_table <- reactive({
         req(admin_sel())
@@ -103,6 +122,9 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
           admins <- admin_sel()
           bounds <- bounds[bounds$GID_2 %in% admins]
         }
+
+        if (nrow(bounds) == 0) return(NULL)
+
         index_cols <- grep("index", names(weighted_data), value = TRUE)
         dt_table <- weighted_data[, c("NAME_1", "NAME_2", index_cols, "GID_2")]
         dt_table <- rapply(dt_table, round, classes = "numeric",
@@ -116,7 +138,7 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
       })
 
       output$varTable <- renderDataTable({
-        req(admin_sel())
+        req(dt_table())
         lookup <- data()$lookup
         a1_name <- subset(lookup, clean_name == "NAME_1", "final_name")[[1]]
         a2_name <- subset(lookup, clean_name == "NAME_2", "final_name")[[1]]

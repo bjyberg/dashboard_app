@@ -7,7 +7,8 @@ library(terra)
 
 ### ----- UI ---- ###
 ui <- fluidPage(
-  navbarPage("AMD Adaptive Capacity",
+  navbarPage(
+    "AMD Adaptive Capacity Dashboard",
   tags$style(type = 'text/css',
                                 ".nav.navbar-nav {visibility: hidden;}",
                                 ".navbar-brand {font-size: 45px; float: left; margin-left: 20 px; padding-top:40px;}",
@@ -66,6 +67,7 @@ server <- function(input, output, session) {
     }
     return(data)
   })
+
 
   leafletServer("map",
     reactive(country_data()),

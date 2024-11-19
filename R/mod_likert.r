@@ -97,15 +97,13 @@ likertServer <- function(id, country_lookup) {
       })
 
       w_lookup <- reactive(country_lookup()[!is.na(country_lookup()$question_id), ])
-      
+
       weights <- reactive({
         # q_weights <- aggregate(value ~ w_id, data = lik_sels$data, mean)
         capitals <- sapply(unique(w_lookup()$group), aggregate_weight, "capital", w_lookup(), lik_sels$data)
         variables <- sapply(unique(w_lookup()$standardized_name), aggregate_weight, "variable", w_lookup(), lik_sels$data)
         list(capital = capitals, variable = variables)
       })
-
-      # observe(print(weights()))
 
       weights_debounced <- debounce(weights, 1000)
 
