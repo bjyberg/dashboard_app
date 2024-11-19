@@ -9,8 +9,6 @@ leafletUI <- function(id) {
   tagList(
     leafletOutput(ns("map")),
     hr(),
-    # conditionalPanel(
-    #       condition = "input.explore_dims != 1",
     DTOutput(ns("varTable"))
   )
 }
