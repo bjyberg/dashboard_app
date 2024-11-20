@@ -17,7 +17,6 @@ plotweightServer <- function(id, weight_ls) {
           type = "scatterpolar",
           mode = "markers",
           r = weights,
-          color = "#FAD9A2",
           theta = tools::toTitleCase(names(weights)),
           name = "Weights",
           tooltip = NULL,
