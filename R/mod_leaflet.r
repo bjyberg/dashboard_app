@@ -36,7 +36,6 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
           return(leaflet() |> addTiles())
         } else {
           admins <- admin_sel()
-          print(admins)
           bounds <- bounds[bounds$GID_2 %in% admins]
         }
 
@@ -59,10 +58,12 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
 
         lookup <- data()$lookup
           if(variable_sel()$type == "capital") {
-            colors <- "BuPu" # need to add another color just for ac capital
+            colors <- c("#E76254", "#EE8648", "#F5A354", "#FCC468", "#FFDD9A",
+                "#D4E1CB", "#93CFDB", "#68AEC8", "#4C86A8", "#346391", "#1E466E") # need to add another color just for ac capital
             variable_name <- paste0(strsplit(variable, "_")[[1]][1], " Index")
           }  else {
-            colors <- "YlOrRd"
+            colors <- c("#E76254", "#EE8648", "#F5A354", "#FCC468", "#FFDD9A",
+                "#D4E1CB", "#93CFDB", "#68AEC8", "#4C86A8", "#346391", "#1E466E")
             variable_name <- lookup[lookup$clean_name == variable, "final_name"]
           }
         # leaf_pal <- colorNumeric(colors, map_data[[variable]], na.color = "transparent")
@@ -90,9 +91,18 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
           "<br/>Total Adaptive Capacity: ", round(map_data$ac_index, 3),
           variable_text
         )
+        legend_title <- if (variable_name == "Adaptive Capacity") {
+          variable_name
+        } else {
+          HTML(paste0(
+            "Adaptive Capacity",
+            "<br/>",
+            "<span style='font-size: 12px; font-weight: normal;'>", variable_name, "</span>"
+          ))
+        }
 
         leaflet() |>
-          addTiles() |>
+          addTiles() |> 
           addPolygons(
             data = map_data,
             layerId = map_data$GID_2,
@@ -106,8 +116,11 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
             pal = leaf_pal,
             # values = map_data$selected_var,
             values = c(0,1),
+            labFormat = function(type, breaks) {
+              return(c("Low", "", "Mid.", "", "High"))
+            },
             opacity = 0.8,
-            title = variable_name
+            title = legend_title
             )
       }),
       200)

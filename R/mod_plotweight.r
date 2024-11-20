@@ -17,6 +17,7 @@ plotweightServer <- function(id, weight_ls) {
           type = "scatterpolar",
           mode = "markers",
           r = weights,
+          color = "#FAD9A2",
           theta = tools::toTitleCase(names(weights)),
           name = "Weights",
           tooltip = NULL,
@@ -37,8 +38,7 @@ plotweightServer <- function(id, weight_ls) {
                 rotation = 24
               ),
               radialaxis = list(
-                visible = F
-                #     range = c(0, max(ac_weightings[input$ac_weight][[1]]))
+                visible = FALSE
               )
             ),
             showlegend = FALSE

@@ -7,19 +7,19 @@ library(terra)
 
 ### ----- UI ---- ###
 ui <- fluidPage(
-  navbarPage(
-    "AMD Adaptive Capacity Dashboard",
-  tags$style(type = 'text/css',
-                                ".nav.navbar-nav {visibility: hidden;}",
-                                ".navbar-brand {font-size: 45px; float: left; margin-left: 20 px; padding-top:40px;}",
-                                ".navbar-nav {float: left; margin-right: 20 px;}"),
-  tags$script(HTML("var header = $('.navbar > .container-fluid');
-    header.append('<div style=\"float:right\"><ahref=\"url\"><img src=\"alliance_logo.png\" style=\"float:right;height:100px;padding-top:5px;\"> </a></div>');
-    header.append('<div style=\"float:right\"><ahref=\"url\"><img src=\"amd_logo.png\" style=\"float:right;height:100px;padding-top:5px;\"> </a></div>');")
-  ),
-    tabPanel("Explore",
-      sidebarLayout(
-        sidebarPanel(
+  titlePanel(
+    title = div(
+      style = "display: flex; align-items: center; justify-content: space-between;",
+      h1("AMD Adaptive Capacity Dashboard", style = "font-size: 40px; margin-right: 20px;"),
+      div(
+        img(src = "amd_logo.png", style = "height: 75px; margin-left: 10px;"),
+        img(src = "alliance_logo.png", style = "height: 100px; padding-top: 5px; margin-left: 5px;")
+      )
+    ),
+    windowTitle = "Adaptive Capacity Dashboard"
+    ),
+    sidebarLayout(
+      sidebarPanel(
           countryUI('country-sel'),
           adminUI('admin-sel'),
           variableUI('variable-selection'),
@@ -33,9 +33,7 @@ ui <- fluidPage(
         mainPanel(
           leafletUI("map"),
         )
-      ),
-    ),
-  )
+      )
 )
 
 ### ----- SERVER ---- ###
@@ -61,7 +59,7 @@ server <- function(input, output, session) {
       cols_longname <- na.omit(lookup[lookup$group == c, "standardized_name"])
       data_weighted <- min_max_scale(data[cols] * var_weights[cols_longname])
       index <- min_max_scale(rowSums(data_weighted, na.rm = TRUE))
-      data[paste0(tolower(c), "_index")] <- min_max_scale(index * capital_weights[c]) # this needs to equal 1 at no weighting
+      data[paste0(tolower(c), "_index")] <- min_max_scale(index * capital_weights[c])
       ac_index <- min_max_scale(rowSums(data[grep('index', names(data))]))
       data['ac_index'] <- ac_index
     }

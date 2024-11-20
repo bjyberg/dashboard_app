@@ -32,7 +32,7 @@ aggregate_weight <- function(name, type = c("capital", "variable"), weight_looku
     },
     "geo_mean" = \(x) exp(mean(log(x)))
   )
-  return(agg_function(values))
+  return(round(agg_function(values), 3))
 }
 
 ### ----- UI ---- ###
