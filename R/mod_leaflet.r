@@ -23,6 +23,8 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
         social_index = "Social Index", physical_index = "Physical Index",
         economic_index = "Economic Index")
 
+        observe({print(data()$data)})
+
       output$map <- debounce(
         renderLeaflet({
         req(admin_sel)
@@ -80,8 +82,12 @@ leafletServer <- function(id, data, weighted_data, admin_sel, variable_sel) {
 
         if(variable == "ac_index") {
           variable_text <- ''
+        } else if (grepl('index', variable)) {
+          variable_text <- paste0("<br/>", "<b>", variable_name,": </b>", round(map_data[[variable]][[1]], 3))
         } else {
-          variable_text <- paste0("<br/>", variable_name, ": ", round(map_data[[variable]][[1]], 3))
+          variable_text <- paste0("<br/>", "<b>", variable_name,": </b>",
+            "<br/> Index Value: ", round(map_data[[variable]][[1]], 3), 
+            "<br/> Actual Value: ", round(data()$data[[variable]][[2]], 3))
         }
 
         pop_content <- paste0(
